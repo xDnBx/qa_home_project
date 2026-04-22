@@ -1,0 +1,31 @@
+plugins {
+    id 'java'
+    id 'io.qameta.allure' version '3.1.0'
+}
+
+group = 'org.example'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
+    testImplementation 'tools.jackson.core:jackson-databind:3.1.2'
+    testImplementation 'com.codeborne:selenide:7.16.0'
+    testImplementation 'io.rest-assured:rest-assured:5.3.0'
+    testImplementation 'io.qameta.allure:allure-junit5:2.25.0'
+    testImplementation 'io.qameta.allure:allure-commandline:2.25.0'
+    testImplementation 'io.qameta.allure:allure-assertj:2.25.0'
+    testImplementation 'io.qameta.allure:allure-rest-assured:2.25.0'
+    testImplementation 'io.qameta.allure:allure-java-commons:2.25.0'
+    testImplementation 'io.qameta.allure:allure-selenide:2.25.0'
+    testRuntimeOnly 'org.aspectj:aspectjweaver:1.9.20'
+    testCompileOnly 'org.projectlombok:lombok:1.18.44'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.44'
+}
+
+test {
+    useJUnitPlatform()
+}
