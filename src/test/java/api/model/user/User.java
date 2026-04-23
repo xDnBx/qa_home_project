@@ -1,4 +1,4 @@
-package api.model;
+package api.model.user;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -8,12 +8,13 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Product {
+public class User {
+    Address address;
     Integer id;
-    String title;
-    Double price;
-    String description;
-    String category;
-    String image;
-    Rating rating;
+    String email;
+    String username;
+    String password;
+    Name name;
+    String phone;
+    Integer __v;
 }

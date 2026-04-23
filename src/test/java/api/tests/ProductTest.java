@@ -1,7 +1,7 @@
 package api.tests;
 
-import api.model.Product;
-import api.model.Rating;
+import api.model.product.Product;
+import api.model.product.Rating;
 import api.steps.ProductSteps;
 import io.qameta.allure.Feature;
 import org.junit.jupiter.api.DisplayName;
@@ -11,19 +11,19 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@Feature("Api Test Products")
-public class ProductsTest {
+@Feature("Api Test Product")
+public class ProductTest {
 
     @Test
     @DisplayName("Проверка получения списка всех товаров")
-    public void testGetProducts() {
-        // Запрос списка продуктов
-        List<Product> products = ProductSteps.getProducts();
+    public void testGetAllProducts() {
+        // Запрос списка товаров
+        List<Product> products = ProductSteps.getAllProducts();
 
         // Проверка непустоты списка
         assertFalse(products.isEmpty(), "Список пуст");
 
-        // Проверка количества продуктов
+        // Проверка количества товаров
         assertEquals(20, products.size(), "Количество товаров не соответствует ожидаемому");
 
         // Проверка уникальности id
@@ -33,14 +33,14 @@ public class ProductsTest {
 
         // Проверка заполненности полей
         for (Product product : products) {
-            assertNotNull(product.getId(), "Поле 'id' пустое");
-            assertNotNull(product.getTitle(), "Поле 'title' пустое");
-            assertNotNull(product.getPrice(), "Поле 'price' пустое");
-            assertNotNull(product.getDescription(), "Поле 'description' пустое");
-            assertNotNull(product.getCategory(), "Поле 'category' пустое");
-            assertNotNull(product.getImage(), "Поле 'image' пустое");
-            assertNotNull(product.getRating().getRate(), "Поле 'rating.rate' пустое");
-            assertNotNull(product.getRating().getCount(), "Поле 'rating.count' пустое");
+            assertNotNull(product.getId(), "Поле id пустое");
+            assertNotNull(product.getTitle(), "Поле title пустое");
+            assertNotNull(product.getPrice(), "Поле price пустое");
+            assertNotNull(product.getDescription(), "Поле description пустое");
+            assertNotNull(product.getCategory(), "Поле category пустое");
+            assertNotNull(product.getImage(), "Поле image пустое");
+            assertNotNull(product.getRating().getRate(), "Поле rating.rate пустое");
+            assertNotNull(product.getRating().getCount(), "Поле rating.count пустое");
         }
     }
 
@@ -102,6 +102,32 @@ public class ProductsTest {
     @Test
     @DisplayName("Проверка обновления товара по id")
     public void testPutProductWithId() {
+        // Создание ожидаемого товара
+        Product expectedProduct = Product.builder()
+                .id(1)
+                .title("12345")
+                .price(109.94)
+                .description("67890")
+                .category("1men's clothing")
+                .image("https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_t1.png")
+                .rating(Rating.builder().rate(4.3).count(125).build())
+                .build();
+
+        // Запрос товара по id
+        Product product = ProductSteps.putProductById(1, expectedProduct);
+
+        // Проверка полей нового товара с исходным
+        assertEquals(expectedProduct.getId(), product.getId(), "Поле id не совпадает");
+        assertEquals(expectedProduct.getTitle(), product.getTitle(), "Поле title не совпадает");
+        assertEquals(expectedProduct.getPrice(), product.getPrice(), "Поле price не совпадает");
+        assertEquals(expectedProduct.getDescription(), product.getDescription(), "Поле description не совпадает");
+        assertEquals(expectedProduct.getCategory(), product.getCategory(), "Поле category не совпадает");
+        assertEquals(expectedProduct.getImage(), product.getImage(), "Поле image не совпадает");
+    }
+
+    @Test
+    @DisplayName("Проверка удаления товара по id")
+    public void testDeleteProductWithId() {
         // Запрос на удаление товара
         Product product = ProductSteps.deleteProductById(1);
 

@@ -1,6 +1,6 @@
 package api.steps;
 
-import api.model.product.Product;
+import api.model.user.User;
 import api.specification.ApiSpecification;
 import io.qameta.allure.Step;
 import io.restassured.common.mapper.TypeRef;
@@ -9,13 +9,13 @@ import java.util.List;
 
 import static io.restassured.RestAssured.given;
 
-public class ProductSteps {
-    public static final String BASE_URL_PRODUCT ="https://fakestoreapi.com/products";
+public class UserSteps {
+    public static final String BASE_URL_USER ="https://fakestoreapi.com/users";
 
-    @Step("Получение списка всех товаров")
-    public static List<Product> getAllProducts() {
+    @Step("Получение списка всех пользователей")
+    public static List<User> getAllUsers() {
         // Установка спецификации
-        ApiSpecification.installSpecification(ApiSpecification.requestSpec(BASE_URL_PRODUCT),
+        ApiSpecification.installSpecification(ApiSpecification.requestSpec(BASE_URL_USER),
                 ApiSpecification.responseSpec(200));
 
         return given()
@@ -27,25 +27,25 @@ public class ProductSteps {
                 });
     }
 
-    @Step("Создание нового товара: {product.title}")
-    public static Product createProduct(Product product) {
+    @Step("Создание нового пользователя с id: {user.id}")
+    public static User createUser(User user) {
         // Установка спецификации
-        ApiSpecification.installSpecification(ApiSpecification.requestSpec(BASE_URL_PRODUCT),
+        ApiSpecification.installSpecification(ApiSpecification.requestSpec(BASE_URL_USER),
                 ApiSpecification.responseSpec(201));
 
         return given()
-                .body(product)
+                .body(user)
                 .when()
                 .post()
                 .then()
                 .log().all()
-                .extract().as(Product.class);
+                .extract().as(User.class);
     }
 
-    @Step("Получение товара по id: {id}")
-    public static Product getProductById(int id) {
+    @Step("Получение пользователя по id: {id}")
+    public static User getUserById(int id) {
         // Установка спецификации
-        ApiSpecification.installSpecification(ApiSpecification.requestSpec(BASE_URL_PRODUCT),
+        ApiSpecification.installSpecification(ApiSpecification.requestSpec(BASE_URL_USER),
                 ApiSpecification.responseSpec(200));
 
         return given()
@@ -53,28 +53,28 @@ public class ProductSteps {
                 .get("/" + id)
                 .then()
                 .log().all()
-                .extract().as(Product.class);
+                .extract().as(User.class);
     }
 
-    @Step("Обновление товара по id: {id}")
-    public static Product putProductById(int id, Product product) {
+    @Step("Обновление пользователя по id: {id}")
+    public static User putUserById(int id, User user) {
         // Установка спецификации
-        ApiSpecification.installSpecification(ApiSpecification.requestSpec(BASE_URL_PRODUCT),
+        ApiSpecification.installSpecification(ApiSpecification.requestSpec(BASE_URL_USER),
                 ApiSpecification.responseSpec(200));
 
         return given()
-                .body(product)
+                .body(user)
                 .when()
                 .put("/" + id)
                 .then()
                 .log().all()
-                .extract().as(Product.class);
+                .extract().as(User.class);
     }
 
-    @Step("Удаление товара по id: {id}")
-    public static Product deleteProductById(int id) {
+    @Step("Удаление пользователя по id: {id}")
+    public static User deleteUserById(int id) {
         // Установка спецификации
-        ApiSpecification.installSpecification(ApiSpecification.requestSpec(BASE_URL_PRODUCT),
+        ApiSpecification.installSpecification(ApiSpecification.requestSpec(BASE_URL_USER),
                 ApiSpecification.responseSpec(200));
 
         return given()
@@ -82,6 +82,6 @@ public class ProductSteps {
                 .delete("/" + id)
                 .then()
                 .log().all()
-                .extract().as(Product.class);
+                .extract().as(User.class);
     }
 }

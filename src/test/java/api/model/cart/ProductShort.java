@@ -1,4 +1,4 @@
-package api.model;
+package api.model.cart;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -8,7 +8,7 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Rating {
-    Double rate;
-    Integer count;
+public class ProductShort {
+    Integer productId;
+    Integer quantity;
 }
