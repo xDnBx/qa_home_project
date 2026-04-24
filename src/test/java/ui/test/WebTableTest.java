@@ -19,11 +19,21 @@ public class WebTableTest extends BaseTest {
                 .department("Main")
                 .build();
 
+        UserShort user1 = UserShort.builder()
+                .firstName("Sammy")
+                .lastName("Pumpkins")
+                .email("sammy@example.com")
+                .age(30)
+                .salary(5000)
+                .department("Reception")
+                .build();
+
         new MainPage()
                 .openElementPage()
                 .openWebTablePage()
                 .fillWebTablePage(user)
                 .checkData(user)
-                .deleteValue(user);
+                .deleteValue(user)
+                .editValue(user1);
     }
 }

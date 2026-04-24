@@ -44,10 +44,38 @@ public class WebTablePage {
     }
 
     @Step("Удаление созданной записи из таблицы")
-    public void deleteValue(UserShort expectedUser) {
+    public WebTablePage deleteValue(UserShort expectedUser) {
         $x("//span[@id='delete-record-4']").click();
 
         // Проверка удаления записи
         $("tbody").shouldNotHave(text(expectedUser.getFirstName()));
+
+        return this;
+    }
+
+    @Step("Редактирование записи в таблице")
+    public void editValue(UserShort expectedUser) {
+        $x("//span[@id='edit-record-3']").click();
+        $x("//input[@id='firstName']").setValue(expectedUser.getFirstName());
+        $x("//input[@id='lastName']").setValue(expectedUser.getLastName());
+        $x("//input[@id='userEmail']").setValue(expectedUser.getEmail());
+        $x("//input[@id='age']").setValue(String.valueOf(expectedUser.getAge()));
+        $x("//input[@id='salary']").setValue(String.valueOf(expectedUser.getSalary()));
+        $x("//input[@id='department']").setValue(String.valueOf(expectedUser.getDepartment()));
+        $x("//button[@id='submit']").click();
+
+        // Проверка всех полей добавленной записи
+        assertEquals(expectedUser.getFirstName(), $x("//tbody/tr[3]/td[1]").getText(),
+                "Имя не совпадает");
+        assertEquals(expectedUser.getLastName(), $x("//tbody/tr[3]/td[2]").getText(),
+                "Фамилия не совпадает");
+        assertEquals(expectedUser.getAge().toString(), $x("//tbody/tr[3]/td[3]").getText(),
+                "Возраст не совпадает");
+        assertEquals(expectedUser.getEmail(), $x("//tbody/tr[3]/td[4]").getText(),
+                "Email не совпадает");
+        assertEquals(expectedUser.getSalary().toString(), $x("//tbody/tr[3]/td[5]").getText(),
+                "Зарплата не совпадает");
+        assertEquals(expectedUser.getDepartment(), $x("//tbody/tr[3]/td[6]").getText(),
+                "Отдел не совпадает");
     }
 }
