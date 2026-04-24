@@ -12,4 +12,11 @@ public class MainPage {
         $x("//div[@class='card-body']/h5[text()='Forms']").click();
         return new FormPage();
     }
+
+    @Step("Открыть страницу с элементами")
+    public ElementPage openElementPage() {
+        Selenide.open("/");
+        $x("//div[@class='card-body']/h5[text()='Elements']").click();
+        return new ElementPage();
+    }
 }
