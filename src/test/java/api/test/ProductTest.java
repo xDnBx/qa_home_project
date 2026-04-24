@@ -1,4 +1,4 @@
-package api.tests;
+package api.test;
 
 import api.model.product.Product;
 import api.model.product.Rating;

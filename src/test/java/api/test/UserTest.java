@@ -1,4 +1,4 @@
-package api.tests;
+package api.test;
 
 import api.model.user.Address;
 import api.model.user.Geolocation;

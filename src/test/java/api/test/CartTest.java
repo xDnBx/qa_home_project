@@ -1,4 +1,4 @@
-package api.tests;
+package api.test;
 
 import api.model.cart.Cart;
 import api.model.cart.ProductShort;
