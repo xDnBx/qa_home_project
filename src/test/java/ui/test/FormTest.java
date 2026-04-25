@@ -20,7 +20,7 @@ public class FormTest extends BaseTest {
                 .lastName("Doe")
                 .email("john.doe@test.com")
                 .gender("Male")
-                .mobilePhone("79991234567")
+                .mobilePhone("7999123456")
                 .dayOfBirth("15 Jan 1990")
                 .subjects(Arrays.asList("Maths", "Physics", "Biology"))
                 .hobbies(Arrays.asList("Sports", "Music"))
@@ -34,6 +34,6 @@ public class FormTest extends BaseTest {
                 .openFormPage()
                 .openFormPracticePage()
                 .fillPracticePage(user, file)
-                .checkData(user.getFirstName() + " " + user.getLastName());
+                .checkData(user);
     }
 }
